@@ -2,13 +2,30 @@ import React, { useState } from "react";
 
 const LoginForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add login logic here
-    alert("Login submitted! (Implement backend logic)");
+    setError("");
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user)); // Store user info
+        window.location.href = "/dashboard"; // Redirect to dashboard
+      } else {
+        setError(data.msg || "Login failed");
+      }
+    } catch (err) {
+      setError("Server error");
+    }
   };
 
   return (
@@ -37,6 +54,7 @@ const LoginForm = () => {
       >
         Login
       </button>
+      {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
     </form>
   );
 };

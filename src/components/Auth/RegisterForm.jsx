@@ -3,15 +3,32 @@ import RoleSelector from "./RoleSelector";
 
 const RegisterForm = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "client" });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleRoleChange = (role) => setForm({ ...form, role });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add registration logic here
-    alert("Registration submitted! (Implement backend logic)");
+    setError("");
+    setSuccess("");
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess("Registration successful! You can now log in.");
+      } else {
+        setError(data.msg || "Registration failed");
+      }
+    } catch (err) {
+      setError("Server error");
+    }
   };
 
   return (
@@ -50,6 +67,8 @@ const RegisterForm = () => {
       >
         Sign Up
       </button>
+      {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
+      {success && <div className="text-green-600 text-sm mt-2">{success}</div>}
     </form>
   );
 };
