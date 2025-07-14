@@ -1,9 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard"; // <-- Make sure this import exists
-import FreelancerDashboard from "./components/freelancer/FreelancerDashboard"; // <-- For freelancer
+import FreelancerDashboard from "./components/freelancer/FreelancerDashboard";
+// import other pages as needed
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} /> {/* <-- Add this line */}
         <Route path="/freelancer/dashboard" element={<FreelancerDashboard />} />
+        <Route path="/dashboard" element={<Navigate to="/freelancer/dashboard" />} />
+        {/* Add other routes as needed */}
       </Routes>
     </Router>
   );

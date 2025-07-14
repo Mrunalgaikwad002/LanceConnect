@@ -1,25 +1,37 @@
-import React from "react";
-import GigList from "./gigs/GigList";
+import React, { useState } from "react";
+import Sidebar from "./dashboard/Sidebar";
+import Overview from "./dashboard/Overview";
+import MyGigs from "./dashboard/MyGigs";
+import Orders from "./dashboard/Orders";
+import Messages from "./dashboard/Messages";
+import Reviews from "./dashboard/Reviews";
+import Earnings from "./dashboard/Earnings";
+import Settings from "./dashboard/Settings";
 
 const FreelancerDashboard = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [section, setSection] = useState("overview");
+
+  const renderSection = () => {
+    switch (section) {
+      case "overview": return <Overview />;
+      case "gigs": return <MyGigs />;
+      case "orders": return <Orders />;
+      case "messages": return <Messages />;
+      case "reviews": return <Reviews />;
+      case "earnings": return <Earnings />;
+      case "settings": return <Settings />;
+      case "logout":
+        localStorage.clear();
+        window.location.href = "/login";
+        return null;
+      default: return <Overview />;
+    }
+  };
 
   return (
-    <div>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="w-full max-w-2xl p-8 bg-white rounded-2xl shadow-2xl text-center">
-          <h2 className="text-3xl font-bold text-indigo-700 mb-6">Freelancer Dashboard</h2>
-          {user && user.role === "freelancer" ? (
-            <div>
-              <p className="text-xl text-gray-700 mb-2">Welcome, <span className="font-semibold">{user.name}</span>!</p>
-              <p className="text-gray-500">Role: {user.role}</p>
-            </div>
-          ) : (
-            <p className="text-red-500">You are not logged in as a freelancer.</p>
-          )}
-        </div>
-      </div>
-      <GigList />
+    <div className="flex min-h-screen bg-offwhite">
+      <Sidebar active={section} onSelect={setSection} />
+      <main className="flex-1 p-8 bg-white">{renderSection()}</main>
     </div>
   );
 };
