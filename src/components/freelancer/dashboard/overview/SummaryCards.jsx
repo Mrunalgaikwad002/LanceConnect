@@ -1,32 +1,24 @@
 import React from "react";
-import { FaStar, FaWallet, FaClipboardList, FaCheckCircle, FaTasks } from "react-icons/fa";
 
 const stats = [
-  { label: "Total Gigs", value: "--", icon: <FaTasks className="text-steelblue text-2xl" />, color: "bg-white" },
-  { label: "Active Orders", value: "--", icon: <FaClipboardList className="text-darkblue text-2xl" />, color: "bg-white" },
-  { label: "Completed Orders", value: "--", icon: <FaCheckCircle className="text-green-500 text-2xl" />, color: "bg-white" },
-  { label: "Total Earnings", value: "₹--", icon: <FaWallet className="text-orange-500 text-2xl" />, color: "bg-white" },
-  { label: "Avg Rating", value: "--", icon: <FaStar className="text-yellow-400 text-2xl" />, color: "bg-white" },
+  { label: "Total Gigs", value: 7, color: "text-purple-600" },
+  { label: "Active Orders", value: 3, color: "text-orange-500" },
+  { label: "Completed Orders", value: 15, color: "text-green-600" },
+  { label: "Total Earnings", value: "₹42,500", color: "text-blue-600" },
+  { label: "Avg Rating", value: "4.8", color: "text-yellow-500" },
 ];
 
 const SummaryCards = () => (
-  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-    {stats.slice(0, 3).map((stat) => (
-      <div key={stat.label} className={`rounded-xl shadow-lg p-6 flex flex-col items-center ${stat.color} border-b-4 border-steelblue`}>
-        <div className="mb-2">{stat.icon}</div>
-        <div className="text-3xl font-bold mb-1 text-darkblue">{stat.value}</div>
-        <div className="text-sm text-steelblue font-semibold uppercase tracking-wide">{stat.label}</div>
+  <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+    {stats.map((stat) => (
+      <div
+        key={stat.label}
+        className="bg-white rounded-xl shadow-md p-6 flex flex-col items-start min-w-[120px]"
+      >
+        <div className="text-sm text-gray-500 mb-2">{stat.label}</div>
+        <div className={`text-3xl font-extrabold ${stat.color}`}>{stat.value}</div>
       </div>
     ))}
-    <div className="col-span-1 sm:col-span-2 flex gap-4 mt-4 sm:mt-0">
-      {stats.slice(3).map((stat) => (
-        <div key={stat.label} className={`flex-1 rounded-xl shadow-lg p-6 flex flex-col items-center ${stat.color} border-b-4 border-steelblue`}>
-          <div className="mb-2">{stat.icon}</div>
-          <div className="text-3xl font-bold mb-1 text-darkblue">{stat.value}</div>
-          <div className="text-sm text-steelblue font-semibold uppercase tracking-wide">{stat.label}</div>
-        </div>
-      ))}
-    </div>
   </div>
 );
 

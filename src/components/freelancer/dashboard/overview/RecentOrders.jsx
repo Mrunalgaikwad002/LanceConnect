@@ -14,21 +14,21 @@ const statusColors = {
 
 const RecentOrders = () => (
   <div>
-    <h2 className="font-semibold mb-2">Recent Orders</h2>
+    <h2 className="text-xl font-bold mb-4 text-black">Recent Orders</h2>
     <div className="bg-white rounded-xl shadow-lg p-4">
       <table className="w-full text-sm">
         <thead>
-          <tr className="text-left text-steelblue uppercase text-xs">
+          <tr className="text-left text-base font-bold text-black uppercase">
             <th className="py-2">Client</th><th>Gig Title</th><th>Status</th><th>Due Date</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((o, i) => (
             <tr key={i} className="border-t hover:bg-offwhite transition">
-              <td className="py-2 font-semibold">{o.client}</td>
-              <td>{o.gig}</td>
+              <td className="py-2 font-semibold text-gray-800">{o.client}</td>
+              <td className="text-gray-800">{o.gig}</td>
               <td><span className={`px-2 py-1 rounded-full text-xs font-bold ${statusColors[o.status] || "bg-gray-100 text-gray-800"}`}>{o.status}</span></td>
-              <td>{o.due}</td>
+              <td className="text-gray-500">{o.due}</td>
             </tr>
           ))}
         </tbody>
