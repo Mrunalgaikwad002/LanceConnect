@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Sidebar from "./dashboard/Sidebar";
 import Overview from "./dashboard/overview/Overview";
 import MyGigs from "./dashboard/MyGigs";
-// import Orders from "./dashboard/Orders";
-// import Messages from "./dashboard/Messages";
+import Orders from "./dashboard/Orders";
+import Messages from "./dashboard/Messages";
 // import Reviews from "./dashboard/Reviews";
 // import Earnings from "./dashboard/Earnings";
 // import Settings from "./dashboard/Settings";
@@ -13,27 +13,35 @@ const FreelancerDashboard = () => {
 
   const renderSection = () => {
     switch (section) {
-      case "overview": return <Overview />;
-      case "gigs": return <MyGigs />;
-      // case "orders": return <Orders />;
-      // case "messages": return <Messages />;
-      // case "reviews": return <Reviews />;
-      // case "earnings": return <Earnings />;
-      // case "settings": return <Settings />;
+      case "overview":
+        return <Overview />;
+      case "mygigs":
+        return <MyGigs />;
+      case "orders":
+        return <Orders />;
+      case "messages":
+        return <Messages />;
+      case "reviews":
+        return <div className="text-center text-gray-500 py-8">Reviews section coming soon...</div>;
+      case "earnings":
+        return <div className="text-center text-gray-500 py-8">Earnings section coming soon...</div>;
+      case "settings":
+        return <div className="text-center text-gray-500 py-8">Settings section coming soon...</div>;
       case "logout":
-        localStorage.clear();
-        window.location.href = "/login";
-        return null;
-      default: return <Overview />;
+        return <div className="text-center text-gray-500 py-8">Logout functionality coming soon...</div>;
+      default:
+        return <Overview />;
     }
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-offwhite">
       <div className="sticky top-0 h-screen">
         <Sidebar active={section} onSelect={setSection} />
       </div>
-      <main className="flex-1 p-8 bg-white overflow-y-auto">{renderSection()}</main>
+      <main className="flex-1 p-8 bg-white overflow-y-auto">
+        {renderSection()}
+      </main>
     </div>
   );
 };

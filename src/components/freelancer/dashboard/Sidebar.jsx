@@ -1,18 +1,18 @@
 import React from "react";
 
 const menu = [
-  { label: "Overview", key: "overview" },
-  { label: "My Gigs", key: "gigs" },
-  { label: "Orders", key: "orders" },
-  { label: "Messages", key: "messages" },
-  { label: "Reviews", key: "reviews" },
-  { label: "Earnings", key: "earnings" },
-  { label: "Settings", key: "settings" },
-  { label: "Logout", key: "logout" },
+  { key: "overview", label: "Overview" },
+  { key: "mygigs", label: "My Gigs" },
+  { key: "orders", label: "Orders" },
+  { key: "messages", label: "Messages" },
+  { key: "reviews", label: "Reviews" },
+  { key: "earnings", label: "Earnings" },
+  { key: "settings", label: "Settings" },
+  { key: "logout", label: "Logout" },
 ];
 
 const Sidebar = ({ active, onSelect }) => (
-  <div className="w-64 min-h-screen bg-darkblue text-offwhite flex flex-col py-8 px-4 sticky top-0">
+  <div className="w-64 bg-darkblue text-offwhite flex flex-col py-8 px-4 sticky top-0 h-screen">
     <h2 className="text-2xl font-bold mb-8 text-center">Freelancer</h2>
     <nav className="flex-1">
       {menu.map(item => (
