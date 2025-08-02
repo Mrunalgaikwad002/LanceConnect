@@ -4,7 +4,7 @@ import Overview from "./dashboard/overview/Overview";
 import MyGigs from "./dashboard/MyGigs";
 import Orders from "./dashboard/Orders";
 import Messages from "./dashboard/Messages";
-// import Reviews from "./dashboard/Reviews";
+import Reviews from "./dashboard/Reviews";
 // import Earnings from "./dashboard/Earnings";
 // import Settings from "./dashboard/Settings";
 
@@ -22,7 +22,7 @@ const FreelancerDashboard = () => {
       case "messages":
         return <Messages />;
       case "reviews":
-        return <div className="text-center text-gray-500 py-8">Reviews section coming soon...</div>;
+        return <Reviews />;
       case "earnings":
         return <div className="text-center text-gray-500 py-8">Earnings section coming soon...</div>;
       case "settings":
