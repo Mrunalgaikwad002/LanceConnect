@@ -16,6 +16,8 @@ const Reviews = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
+  const [replyingTo, setReplyingTo] = useState(null);
+  const [replyText, setReplyText] = useState("");
   const reviewsPerPage = 8;
 
   // Mock data for reviews
@@ -142,6 +144,38 @@ const Reviews = () => {
       freelancerReply: "I apologize for the delays, Rohan. I'm working on improving my project management and communication skills."
     }
   ]);
+
+  // Handle reply submission
+  const handleReplySubmit = (reviewId) => {
+    if (!replyText.trim()) return;
+
+    const updatedReviews = reviews.map(review => {
+      if (review.id === reviewId) {
+        return {
+          ...review,
+          freelancerReply: replyText.trim(),
+          replyDate: new Date().toISOString()
+        };
+      }
+      return review;
+    });
+
+    setReviews(updatedReviews);
+    setReplyingTo(null);
+    setReplyText("");
+  };
+
+  // Handle reply cancellation
+  const handleReplyCancel = () => {
+    setReplyingTo(null);
+    setReplyText("");
+  };
+
+  // Handle reply button click
+  const handleReplyClick = (reviewId) => {
+    setReplyingTo(reviewId);
+    setReplyText("");
+  };
 
   // Calculate summary metrics
   const calculateSummary = () => {
@@ -287,6 +321,12 @@ const Reviews = () => {
             onPageChange={handlePageChange}
             onLoadMore={handleLoadMore}
             hasMorePages={currentPage < totalPages}
+            replyingTo={replyingTo}
+            replyText={replyText}
+            onReplyTextChange={setReplyText}
+            onReplySubmit={handleReplySubmit}
+            onReplyCancel={handleReplyCancel}
+            onReplyClick={handleReplyClick}
           />
         </div>
       </div>

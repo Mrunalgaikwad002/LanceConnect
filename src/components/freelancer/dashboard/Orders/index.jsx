@@ -3,9 +3,9 @@ import OrdersList from "./OrdersList";
 
 const Orders = () => {
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-black">Orders</h2>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-gray-900">Orders</h3>
       </div>
       <OrdersList />
     </div>

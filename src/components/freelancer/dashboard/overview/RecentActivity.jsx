@@ -10,12 +10,12 @@ const activities = [
 ];
 
 const RecentActivity = () => (
-  <div className="bg-white rounded-xl shadow-md p-6">
-    <h2 className="text-xl font-bold mb-4 text-black">Recent Activity</h2>
+  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <h3 className="text-lg font-semibold text-gray-900 mb-6">Recent Activity</h3>
     {activities.map((a, i) => (
-      <div key={i} className={i !== activities.length - 1 ? "mb-4 pb-4 border-b" : ""}>
-        <div className="text-base font-semibold text-gray-800">{a.desc}</div>
-        <div className="text-xs text-gray-400">{a.time}</div>
+      <div key={i} className={i !== activities.length - 1 ? "mb-4 pb-4 border-b border-gray-100" : ""}>
+        <div className="text-sm font-semibold text-gray-700">{a.desc}</div>
+        <div className="text-xs text-gray-500 mt-1">{a.time}</div>
       </div>
     ))}
   </div>

@@ -187,9 +187,9 @@ const initialGigs = [
 ];
 
 const statusColors = {
-  "Active": "bg-green-100 text-green-800",
-  "Paused": "bg-yellow-100 text-yellow-800",
-  "Draft": "bg-gray-100 text-gray-800",
+  "Active": "bg-green-100 text-green-700",
+  "Paused": "bg-yellow-100 text-yellow-700",
+  "Draft": "bg-gray-100 text-gray-700",
 };
 
 const GigCardList = ({ newGig, onGigAdded }) => {
@@ -238,46 +238,46 @@ const GigCardList = ({ newGig, onGigAdded }) => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {gigs.map((gig, i) => (
-          <div key={i} className="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-2">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold text-black">{gig.title}</h3>
-              <span className={`px-2 py-1 rounded-full text-xs font-bold ${statusColors[gig.status] || "bg-gray-100 text-gray-800"}`}>{gig.status}</span>
-            </div>
-            <div className="text-sm text-gray-500">{gig.category}</div>
-            <div className="text-base font-semibold text-blue-600">{gig.price}</div>
-            <div className="flex gap-4 text-sm text-gray-600 mt-2">
-              <span>Orders: <b>{gig.orders}</b></span>
-              <span>⭐ {gig.rating} ({gig.reviews})</span>
-              <span>👁️ {gig.views}</span>
-            </div>
-            <div className="flex gap-2 mt-4">
-              <button 
-                className="p-2 rounded hover:bg-blue-100" 
-                title="Edit" 
-                onClick={() => handleEdit(gig)}
-              >
-                <FaEdit className="text-blue-600" />
-              </button>
-              <button 
-                className="p-2 rounded hover:bg-red-100" 
-                title="Delete" 
-                onClick={() => handleDelete(gig)}
-              >
-                <FaTrash className="text-red-600" />
-              </button>
-              <button
-                className="ml-auto px-3 py-1 rounded bg-green-100 text-green-700 font-semibold border border-green-200 hover:bg-green-200"
-                onClick={() => handleViewMore(gig)}
-              >
-                View More Details
-              </button>
-            </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {gigs.map((gig, i) => (
+        <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <h4 className="text-lg font-semibold text-gray-900">{gig.title}</h4>
+            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${statusColors[gig.status] || "bg-gray-100 text-gray-700"}`}>
+              {gig.status}
+            </span>
           </div>
-        ))}
-      </div>
+          <div className="text-sm text-gray-700">{gig.category}</div>
+          <div className="text-base font-semibold text-blue-600">{gig.price}</div>
+          <div className="flex gap-4 text-sm text-gray-700">
+            <span>Orders: <span className="font-semibold">{gig.orders}</span></span>
+            <span>⭐ {gig.rating} ({gig.reviews})</span>
+            <span>👁️ {gig.views}</span>
+          </div>
+          <div className="flex gap-2 mt-auto">
+            <button 
+              className="p-2 rounded hover:bg-blue-50 transition-colors duration-200" 
+              title="Edit" 
+              onClick={() => handleEdit(gig)}
+            >
+              <FaEdit className="text-blue-600" />
+            </button>
+            <button 
+              className="p-2 rounded hover:bg-red-50 transition-colors duration-200" 
+              title="Delete" 
+              onClick={() => handleDelete(gig)}
+            >
+              <FaTrash className="text-red-600" />
+            </button>
+            <button
+              className="ml-auto px-3 py-1 rounded bg-green-100 text-green-700 font-semibold border border-green-200 hover:bg-green-200 transition-colors duration-200"
+              onClick={() => handleViewMore(gig)}
+            >
+              View More Details
+            </button>
+          </div>
+        </div>
+      ))}
       
       {/* Modals */}
       <GigDetailsModal gig={selectedGig} open={modalOpen} onClose={() => setModalOpen(false)} />
@@ -285,21 +285,21 @@ const GigCardList = ({ newGig, onGigAdded }) => {
       
       {/* Delete Confirmation Modal */}
       {deleteConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full relative">
-            <h3 className="text-xl font-bold mb-4 text-black">Delete Gig</h3>
-            <p className="text-gray-600 mb-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Delete Gig</h3>
+            <p className="text-sm text-gray-700 mb-6">
               Are you sure you want to delete "{deleteConfirm.title}"? This action cannot be undone.
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button 
-                className="px-4 py-2 bg-red-600 text-white rounded font-semibold hover:bg-red-700"
+                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 font-semibold"
                 onClick={confirmDelete}
               >
                 Delete
               </button>
               <button 
-                className="px-4 py-2 bg-gray-200 rounded font-semibold"
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-semibold"
                 onClick={cancelDelete}
               >
                 Cancel

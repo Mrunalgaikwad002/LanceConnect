@@ -10,27 +10,40 @@ const messages = [
   { client: "Vikas Sharma", message: "Looking forward to the delivery.", date: "6 days ago", read: true },
 ];
 
+// Color array for consistent avatar colors
+const avatarColors = [
+  "bg-blue-500",
+  "bg-green-500", 
+  "bg-purple-500",
+  "bg-orange-500",
+  "bg-pink-500",
+  "bg-indigo-500",
+  "bg-teal-500",
+  "bg-red-500"
+];
+
 const RecentMessages = () => (
-  <div>
-    <h2 className="text-xl font-bold mb-4 text-black">Recent Messages</h2>
-    <div className="bg-white rounded-xl shadow-lg p-4">
-      <table className="w-full text-sm">
+  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <h3 className="text-lg font-semibold text-gray-900 mb-6">Recent Messages</h3>
+    <div className="overflow-x-auto">
+      <table className="w-full">
         <thead>
-          <tr className="text-left text-base font-bold text-black uppercase">
-            <th className="py-2">Client</th><th>Last Message</th><th>Date</th>
+          <tr className="border-b border-gray-200">
+            <th className="text-left py-3 px-4 font-semibold text-gray-700">Client</th>
+            <th className="text-left py-3 px-4 font-semibold text-gray-700">Last Message</th>
+            <th className="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
           </tr>
         </thead>
         <tbody>
           {messages.map((m, i) => (
-            <tr key={i} className="border-t hover:bg-offwhite transition">
-              <td className="flex items-center gap-2 py-2 text-gray-800">
+            <tr key={i} className="border-b border-gray-100 hover:bg-gray-50">
+              <td className="flex items-center gap-2 py-3 px-4 text-sm text-gray-700">
                 <span
-                  className="inline-flex items-center justify-center h-8 w-8 rounded-full font-bold"
-                  style={{ background: "#546E7A", color: "#fff" }}
+                  className={`inline-flex items-center justify-center h-8 w-8 rounded-full font-bold text-white ${avatarColors[i % avatarColors.length]}`}
                 >
                   {m.client[0]}
                 </span>
-                {m.client}
+                <span className="font-semibold">{m.client}</span>
                 {!m.read && (
                   <span
                     className="ml-2 h-2 w-2 rounded-full"
@@ -39,8 +52,8 @@ const RecentMessages = () => (
                   ></span>
                 )}
               </td>
-              <td className="italic text-gray-500">"{m.message}"</td>
-              <td className="text-gray-500">{m.date}</td>
+              <td className="py-3 px-4 text-sm text-gray-700 italic">"{m.message}"</td>
+              <td className="py-3 px-4 text-sm text-gray-700">{m.date}</td>
             </tr>
           ))}
         </tbody>

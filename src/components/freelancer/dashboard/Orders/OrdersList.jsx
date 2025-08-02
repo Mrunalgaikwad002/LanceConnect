@@ -85,11 +85,11 @@ const initialOrders = [
 ];
 
 const statusColors = {
-  "Pending": "bg-yellow-100 text-yellow-800 border-yellow-200",
-  "In Progress": "bg-blue-100 text-blue-800 border-blue-200",
-  "Delivered": "bg-orange-100 text-orange-800 border-orange-200",
-  "Completed": "bg-green-100 text-green-800 border-green-200",
-  "Cancelled": "bg-red-100 text-red-800 border-red-200",
+  "Pending": "bg-yellow-100 text-yellow-700",
+  "In Progress": "bg-blue-100 text-blue-700",
+  "Delivered": "bg-orange-100 text-orange-700",
+  "Completed": "bg-green-100 text-green-700",
+  "Cancelled": "bg-red-100 text-red-700",
 };
 
 const OrdersList = () => {
@@ -153,13 +153,13 @@ const OrdersList = () => {
         return (
           <div className="flex gap-2">
             <button 
-              className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-200 flex items-center gap-1"
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors duration-200"
               onClick={() => handleStatusChange(order.id, "In Progress")}
             >
               <FaPlay className="text-xs" /> Start
             </button>
             <button 
-              className="px-3 py-1.5 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors duration-200 flex items-center gap-1"
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700 hover:bg-red-200 transition-colors duration-200"
               onClick={() => handleStatusChange(order.id, "Cancelled")}
             >
               <FaTimes className="text-xs" /> Cancel
@@ -170,13 +170,13 @@ const OrdersList = () => {
         return (
           <div className="flex gap-2">
             <button 
-              className="px-3 py-1.5 bg-orange-600 text-white rounded-lg text-sm font-semibold hover:bg-orange-700 transition-colors duration-200 flex items-center gap-1"
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors duration-200"
               onClick={() => handleStatusChange(order.id, "Delivered")}
             >
               <FaUpload className="text-xs" /> Deliver
             </button>
             <button 
-              className="px-3 py-1.5 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors duration-200 flex items-center gap-1"
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700 hover:bg-red-200 transition-colors duration-200"
               onClick={() => handleStatusChange(order.id, "Cancelled")}
             >
               <FaTimes className="text-xs" /> Cancel
@@ -186,7 +186,7 @@ const OrdersList = () => {
       case "Delivered":
         return (
           <button 
-            className="px-3 py-1.5 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors duration-200 flex items-center gap-1"
+            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 hover:bg-green-200 transition-colors duration-200"
             onClick={() => handleStatusChange(order.id, "Completed")}
           >
             <FaCheck className="text-xs" /> Complete
@@ -198,53 +198,53 @@ const OrdersList = () => {
   };
 
   return (
-    <div>
+    <div className="space-y-6">
       <OrderFilters filters={filters} onFilterChange={setFilters} />
       
       {/* Orders Table */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="py-4 px-6 text-left text-sm font-bold text-black uppercase tracking-wider">Order ID</th>
-                <th className="py-4 px-6 text-left text-sm font-bold text-black uppercase tracking-wider">Gig</th>
-                <th className="py-4 px-6 text-left text-sm font-bold text-black uppercase tracking-wider">Client</th>
-                <th className="py-4 px-6 text-left text-sm font-bold text-black uppercase tracking-wider">Status</th>
-                <th className="py-4 px-6 text-left text-sm font-bold text-black uppercase tracking-wider">Time Left</th>
-                <th className="py-4 px-6 text-left text-sm font-bold text-black uppercase tracking-wider">Amount</th>
-                <th className="py-4 px-6 text-left text-sm font-bold text-black uppercase tracking-wider">Actions</th>
+              <tr className="border-b border-gray-200">
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">Order ID</th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">Gig</th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">Client</th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">Status</th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">Time Left</th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">Amount</th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-100">
               {filteredOrders.map((order, i) => (
                 <tr key={i} className="hover:bg-gray-50 transition-colors duration-150">
-                  <td className="py-4 px-6">
-                    <span className="font-semibold text-gray-900">{order.id}</span>
+                  <td className="py-3 px-4">
+                    <span className="font-semibold text-gray-700">{order.id}</span>
                   </td>
-                  <td className="py-4 px-6">
-                    <span className="text-gray-900">{order.gigTitle}</span>
+                  <td className="py-3 px-4">
+                    <span className="text-sm text-gray-700">{order.gigTitle}</span>
                   </td>
-                  <td className="py-4 px-6">
-                    <span className="text-gray-900">{order.clientName}</span>
+                  <td className="py-3 px-4">
+                    <span className="text-sm text-gray-700">{order.clientName}</span>
                   </td>
-                  <td className="py-4 px-6">
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold border ${statusColors[order.status] || "bg-gray-100 text-gray-800 border-gray-200"}`}>
+                  <td className="py-3 px-4">
+                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${statusColors[order.status] || "bg-gray-100 text-gray-700"}`}>
                       {order.status}
                     </span>
                   </td>
-                  <td className="py-4 px-6">
-                    <span className={`text-sm ${order.timeLeft === "Expired" || order.timeLeft === "Completed" || order.timeLeft === "Cancelled" ? "text-gray-500" : "text-gray-900"}`}>
+                  <td className="py-3 px-4">
+                    <span className={`text-sm ${order.timeLeft === "Expired" || order.timeLeft === "Completed" || order.timeLeft === "Cancelled" ? "text-gray-500" : "text-gray-700"}`}>
                       {order.timeLeft}
                     </span>
                   </td>
-                  <td className="py-4 px-6">
-                    <span className="font-semibold text-blue-600">₹{order.amount.toLocaleString()}</span>
+                  <td className="py-3 px-4">
+                    <span className="font-semibold text-green-600">₹{order.amount.toLocaleString()}</span>
                   </td>
-                  <td className="py-4 px-6">
+                  <td className="py-3 px-4">
                     <div className="flex items-center gap-3">
                       <button 
-                        className="p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200" 
+                        className="p-2 rounded-lg hover:bg-blue-50 transition-colors duration-200" 
                         title="View Details"
                         onClick={() => handleViewMore(order)}
                       >

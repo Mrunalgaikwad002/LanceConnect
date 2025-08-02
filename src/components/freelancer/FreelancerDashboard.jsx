@@ -5,8 +5,8 @@ import MyGigs from "./dashboard/MyGigs";
 import Orders from "./dashboard/Orders";
 import Messages from "./dashboard/Messages";
 import Reviews from "./dashboard/Reviews";
-// import Earnings from "./dashboard/Earnings";
-// import Settings from "./dashboard/Settings";
+import Earnings from "./dashboard/Earnings";
+import Settings from "./dashboard/Settings";
 
 const FreelancerDashboard = () => {
   const [section, setSection] = useState("overview");
@@ -24,9 +24,9 @@ const FreelancerDashboard = () => {
       case "reviews":
         return <Reviews />;
       case "earnings":
-        return <div className="text-center text-gray-500 py-8">Earnings section coming soon...</div>;
+        return <Earnings />;
       case "settings":
-        return <div className="text-center text-gray-500 py-8">Settings section coming soon...</div>;
+        return <Settings />;
       case "logout":
         return <div className="text-center text-gray-500 py-8">Logout functionality coming soon...</div>;
       default:

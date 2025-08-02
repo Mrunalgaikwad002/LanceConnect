@@ -254,7 +254,7 @@ const Messages = () => {
       {/* Header */}
       <div className="flex items-center justify-between p-6 border-b border-gray-200">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">Messages</h2>
+          <h3 className="text-lg font-semibold text-gray-900">Messages</h3>
           <p className="text-sm text-gray-600 mt-1">
             {filteredChats.length} conversation{filteredChats.length !== 1 ? 's' : ''}
           </p>
@@ -301,7 +301,7 @@ const Messages = () => {
                   <FaUser className="text-gray-400 text-xl" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Select a conversation</h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-sm text-gray-600">
                   Choose a chat from the list to start messaging
                 </p>
               </div>

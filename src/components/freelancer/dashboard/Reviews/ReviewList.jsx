@@ -9,7 +9,13 @@ const ReviewList = ({
   totalReviews, 
   onPageChange, 
   onLoadMore, 
-  hasMorePages 
+  hasMorePages,
+  replyingTo,
+  replyText,
+  onReplyTextChange,
+  onReplySubmit,
+  onReplyCancel,
+  onReplyClick
 }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -101,7 +107,18 @@ const ReviewList = ({
       {/* Reviews Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} formatDate={formatDate} renderStars={renderStars} />
+          <ReviewCard 
+            key={review.id} 
+            review={review} 
+            formatDate={formatDate} 
+            renderStars={renderStars}
+            isReplying={replyingTo === review.id}
+            replyText={replyText}
+            onReplyTextChange={onReplyTextChange}
+            onReplySubmit={() => onReplySubmit(review.id)}
+            onReplyCancel={onReplyCancel}
+            onReplyClick={() => onReplyClick(review.id)}
+          />
         ))}
       </div>
 

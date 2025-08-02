@@ -1,7 +1,17 @@
 import React from "react";
-import { FaStar, FaUser, FaCalendar, FaReply, FaThumbsUp, FaPaperclip } from "react-icons/fa";
+import { FaStar, FaUser, FaCalendar, FaReply, FaThumbsUp, FaPaperclip, FaTimes, FaCheck } from "react-icons/fa";
 
-const ReviewCard = ({ review, formatDate, renderStars }) => {
+const ReviewCard = ({ 
+  review, 
+  formatDate, 
+  renderStars,
+  isReplying,
+  replyText,
+  onReplyTextChange,
+  onReplySubmit,
+  onReplyCancel,
+  onReplyClick
+}) => {
   const {
     clientName,
     profilePicture,
@@ -101,10 +111,69 @@ const ReviewCard = ({ review, formatDate, renderStars }) => {
             <FaReply className="text-blue-500 text-sm" />
             <span className="text-sm font-medium text-blue-700">Your Reply</span>
             <span className="text-xs text-blue-600">
-              {replyDate && formatDate(replyDate)}
+              {replyDate && (() => {
+                const date = new Date(replyDate);
+                const now = new Date();
+                const diffInMinutes = Math.floor((now - date) / (1000 * 60));
+                
+                if (diffInMinutes < 1) return 'Just now';
+                if (diffInMinutes < 60) return `${diffInMinutes} minutes ago`;
+                if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)} hours ago`;
+                return date.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                });
+              })()}
             </span>
           </div>
           <p className="text-blue-800 text-sm leading-relaxed">{freelancerReply}</p>
+        </div>
+      )}
+
+      {/* Reply Input Section */}
+      {isReplying && (
+        <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <div className="flex items-center space-x-2 mb-3">
+            <FaReply className="text-blue-500 text-sm" />
+            <span className="text-sm font-medium text-gray-700">Write a Reply</span>
+          </div>
+          <textarea
+            value={replyText}
+            onChange={(e) => onReplyTextChange(e.target.value)}
+            placeholder="Write your reply to this review..."
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            rows="3"
+            maxLength="500"
+          />
+          <div className="flex items-center justify-between mt-3">
+            <span className="text-xs text-gray-500">
+              {replyText.length}/500 characters
+            </span>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={onReplyCancel}
+                className="flex items-center space-x-1 px-3 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
+              >
+                <FaTimes className="text-sm" />
+                <span>Cancel</span>
+              </button>
+              <button
+                onClick={onReplySubmit}
+                disabled={!replyText.trim()}
+                className={`flex items-center space-x-1 px-3 py-2 text-sm rounded-lg transition-colors duration-200 ${
+                  replyText.trim()
+                    ? 'bg-blue-500 text-white hover:bg-blue-600'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }`}
+              >
+                <FaCheck className="text-sm" />
+                <span>Submit Reply</span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -120,10 +189,22 @@ const ReviewCard = ({ review, formatDate, renderStars }) => {
             <FaThumbsUp className="text-sm" />
             <span>Helpful</span>
           </button>
-          {!freelancerReply && (
-            <button className="flex items-center space-x-1 text-sm text-blue-600 hover:text-blue-700 transition-colors duration-200">
+          {!freelancerReply && !isReplying && (
+            <button 
+              onClick={onReplyClick}
+              className="flex items-center space-x-1 text-sm text-blue-600 hover:text-blue-700 transition-colors duration-200"
+            >
               <FaReply className="text-sm" />
               <span>Reply</span>
+            </button>
+          )}
+          {!freelancerReply && isReplying && (
+            <button 
+              onClick={onReplyCancel}
+              className="flex items-center space-x-1 text-sm text-gray-500 hover:text-gray-700 transition-colors duration-200"
+            >
+              <FaTimes className="text-sm" />
+              <span>Cancel</span>
             </button>
           )}
         </div>

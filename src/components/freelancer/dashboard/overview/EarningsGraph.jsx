@@ -12,15 +12,15 @@ const data = [
 ];
 
 const EarningsGraph = () => (
-  <div className="bg-white rounded-xl shadow-md p-6">
-    <h2 className="text-xl font-bold mb-4 text-black">Earnings Over Time</h2>
+  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <h3 className="text-lg font-semibold text-gray-900 mb-6">Earnings Over Time</h3>
     <ResponsiveContainer width="100%" height={250}>
       <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
         <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
         <XAxis dataKey="month" stroke="#4B6A7D" />
         <YAxis tickFormatter={v => `₹${v / 1000}k`} stroke="#4B6A7D" />
         <Tooltip formatter={v => `₹${v}`} contentStyle={{ background: "#fff", border: "1px solid #4B6A7D" }} />
-        <Line type="monotone" dataKey="earnings" stroke="#22c55e" strokeWidth={3} dot={{ r: 5, fill: "#22c55e" }} />
+        <Line type="monotone" dataKey="earnings" stroke="#4CAF50" strokeWidth={3} dot={{ r: 5, fill: "#4CAF50" }} />
       </LineChart>
     </ResponsiveContainer>
   </div>
