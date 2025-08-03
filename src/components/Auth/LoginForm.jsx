@@ -19,7 +19,13 @@ const LoginForm = () => {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user)); // Store user info
-        window.location.href = "/dashboard"; // Redirect to dashboard
+        
+        // Redirect based on user role
+        if (data.user.role === "client") {
+          window.location.href = "/client/dashboard";
+        } else {
+          window.location.href = "/freelancer/dashboard";
+        }
       } else {
         setError(data.msg || "Login failed");
       }

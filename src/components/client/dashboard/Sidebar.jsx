@@ -2,11 +2,11 @@ import React from "react";
 
 const menu = [
   { key: "overview", label: "Overview" },
-  { key: "mygigs", label: "My Gigs" },
-  { key: "orders", label: "Orders" },
+  { key: "browsegigs", label: "Browse Gigs" },
+  { key: "myorders", label: "My Orders" },
   { key: "messages", label: "Messages" },
   { key: "reviews", label: "Reviews" },
-  { key: "earnings", label: "Earnings" },
+  { key: "payments", label: "Payments" },
   { key: "settings", label: "Settings" },
   { key: "logout", label: "Logout" },
 ];
@@ -23,7 +23,7 @@ const Sidebar = ({ active, onSelect }) => {
 
   return (
     <div className="w-64 bg-darkblue text-offwhite flex flex-col py-8 px-4 sticky top-0 h-screen">
-      <h2 className="text-2xl font-bold mb-8 text-center">Freelancer</h2>
+      <h2 className="text-2xl font-bold mb-8 text-center">Client</h2>
       <nav className="flex-1">
         {menu.map(item => (
           <button
@@ -47,4 +47,4 @@ const Sidebar = ({ active, onSelect }) => {
   );
 };
 
-export default Sidebar;
+export default Sidebar; 

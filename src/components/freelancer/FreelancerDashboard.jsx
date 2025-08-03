@@ -27,8 +27,6 @@ const FreelancerDashboard = () => {
         return <Earnings />;
       case "settings":
         return <Settings />;
-      case "logout":
-        return <div className="text-center text-gray-500 py-8">Logout functionality coming soon...</div>;
       default:
         return <Overview />;
     }
