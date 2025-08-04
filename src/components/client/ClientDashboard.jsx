@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Sidebar from "./dashboard/Sidebar";
 import Overview from "./dashboard/overview/Overview";
 import BrowseGigs from "./dashboard/browseGigs";
-// import MyOrders from "./dashboard/MyOrders";
-// import Messages from "./dashboard/Messages";
+import MyOrders from "./dashboard/myOrders";
+import Messages from "./dashboard/messages";
 // import Reviews from "./dashboard/Reviews";
 // import Payments from "./dashboard/Payments";
 // import Settings from "./dashboard/Settings";
@@ -17,10 +17,10 @@ const ClientDashboard = () => {
         return <Overview />;
       case "browsegigs":
         return <BrowseGigs />;
-    //   case "myorders":
-    //     return <MyOrders />;
-    //   case "messages":
-    //     return <Messages />;
+      case "myorders":
+        return <MyOrders />;
+      case "messages":
+        return <Messages />;
     //   case "reviews":
     //     return <Reviews />;
     //   case "payments":

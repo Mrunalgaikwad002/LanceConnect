@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { FaStar, FaEye, FaHeart, FaUser } from "react-icons/fa";
+import { FaStar, FaEye, FaHeart } from "react-icons/fa";
 import GigDetailsModal from "./GigDetailsModal";
+import GigSummaryModal from "./GigSummaryModal";
+import { createCheckoutSession, redirectToCheckout } from "../../../../services/stripeService";
 
 const GigCardList = ({ filteredGigs }) => {
   const [selectedGig, setSelectedGig] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [showSummaryModal, setShowSummaryModal] = useState(false);
 
   const handleViewDetails = (gig) => {
     setSelectedGig(gig);
@@ -12,9 +15,36 @@ const GigCardList = ({ filteredGigs }) => {
   };
 
   const handlePurchase = (gig) => {
-    // TODO: Implement purchase functionality
-    console.log("Purchasing gig:", gig.title);
-    alert(`Redirecting to purchase page for: ${gig.title}`);
+    setSelectedGig(gig);
+    setShowSummaryModal(true);
+  };
+
+  const handleProceedToPayment = async (gig, totalAmount) => {
+    try {
+      // Check if user is authenticated
+      const token = localStorage.getItem('token');
+      const user = localStorage.getItem('user');
+      
+      if (!token || !user) {
+        alert('Please log in to make a purchase');
+        return;
+      }
+      
+      console.log('User authenticated:', JSON.parse(user));
+      console.log('Token available:', !!token);
+      
+      // Create checkout session
+      const { url } = await createCheckoutSession(gig, totalAmount);
+      
+      // Close summary modal
+      setShowSummaryModal(false);
+      
+      // Redirect to Stripe checkout
+      redirectToCheckout(url);
+    } catch (error) {
+      console.error('Payment error:', error);
+      alert('Payment failed. Please try again.');
+    }
   };
 
   const avatarColors = [
@@ -129,6 +159,16 @@ const GigCardList = ({ filteredGigs }) => {
           isOpen={showDetailsModal}
           onClose={() => setShowDetailsModal(false)}
           onPurchase={handlePurchase}
+        />
+      )}
+
+      {/* Gig Summary Modal */}
+      {showSummaryModal && selectedGig && (
+        <GigSummaryModal
+          gig={selectedGig}
+          isOpen={showSummaryModal}
+          onClose={() => setShowSummaryModal(false)}
+          onProceedToPayment={handleProceedToPayment}
         />
       )}
     </div>

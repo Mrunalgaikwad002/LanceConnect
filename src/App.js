@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import FreelancerDashboard from "./components/freelancer/FreelancerDashboard";
 import ClientDashboard from "./components/client/ClientDashboard";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancelled from "./pages/PaymentCancelled";
 // import other pages as needed
 
 // Protected Route Component
@@ -54,6 +56,8 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-cancelled" element={<PaymentCancelled />} />
         <Route path="/dashboard" element={<Navigate to="/login" />} />
         {/* Add other routes as needed */}
       </Routes>

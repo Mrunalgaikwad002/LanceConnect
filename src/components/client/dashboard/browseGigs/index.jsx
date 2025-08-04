@@ -16,6 +16,7 @@ const BrowseGigs = () => {
       price: 1500,
       category: "Design & Creative",
       freelancer: {
+        id: "freelancer_1",
         name: "John Designer",
         rating: 4.9,
         reviews: 127,
@@ -32,6 +33,7 @@ const BrowseGigs = () => {
       price: 2800,
       category: "Design & Creative",
       freelancer: {
+        id: "freelancer_2",
         name: "Emma Creative",
         rating: 4.8,
         reviews: 94,
@@ -49,6 +51,7 @@ const BrowseGigs = () => {
       price: 5000,
       category: "Programming & Tech",
       freelancer: {
+        id: "freelancer_3",
         name: "Sarah Developer",
         rating: 4.8,
         reviews: 89,
@@ -65,6 +68,7 @@ const BrowseGigs = () => {
       price: 7500,
       category: "Programming & Tech",
       freelancer: {
+        id: "freelancer_4",
         name: "Raj Tech",
         rating: 4.7,
         reviews: 156,
@@ -82,6 +86,7 @@ const BrowseGigs = () => {
       price: 800,
       category: "Writing & Translation",
       freelancer: {
+        id: "freelancer_5",
         name: "Mike Writer",
         rating: 4.7,
         reviews: 156,
@@ -98,6 +103,7 @@ const BrowseGigs = () => {
       price: 1200,
       category: "Writing & Translation",
       freelancer: {
+        id: "freelancer_6",
         name: "Anna Technical",
         rating: 4.9,
         reviews: 78,
@@ -115,6 +121,7 @@ const BrowseGigs = () => {
       price: 2500,
       category: "Digital Marketing",
       freelancer: {
+        id: "freelancer_7",
         name: "Lisa Marketer",
         rating: 4.9,
         reviews: 203,
@@ -131,6 +138,7 @@ const BrowseGigs = () => {
       price: 1800,
       category: "Digital Marketing",
       freelancer: {
+        id: "freelancer_8",
         name: "Carlos SEO",
         rating: 4.6,
         reviews: 112,
@@ -148,6 +156,7 @@ const BrowseGigs = () => {
       price: 3500,
       category: "Video & Animation",
       freelancer: {
+        id: "freelancer_9",
         name: "Alex Animator",
         rating: 4.6,
         reviews: 78,
@@ -164,6 +173,7 @@ const BrowseGigs = () => {
       price: 2200,
       category: "Video & Animation",
       freelancer: {
+        id: "freelancer_10",
         name: "Sophie Editor",
         rating: 4.8,
         reviews: 145,
@@ -181,6 +191,7 @@ const BrowseGigs = () => {
       price: 900,
       category: "Music & Audio",
       freelancer: {
+        id: "freelancer_11",
         name: "Maria Voice",
         rating: 4.9,
         reviews: 167,
@@ -197,6 +208,7 @@ const BrowseGigs = () => {
       price: 1800,
       category: "Music & Audio",
       freelancer: {
+        id: "freelancer_12",
         name: "David Composer",
         rating: 4.7,
         reviews: 89,
@@ -214,6 +226,7 @@ const BrowseGigs = () => {
       price: 4000,
       category: "Business",
       freelancer: {
+        id: "freelancer_13",
         name: "David Consultant",
         rating: 4.8,
         reviews: 95,
@@ -230,6 +243,7 @@ const BrowseGigs = () => {
       price: 3200,
       category: "Business",
       freelancer: {
+        id: "freelancer_14",
         name: "Priya Finance",
         rating: 4.9,
         reviews: 134,
