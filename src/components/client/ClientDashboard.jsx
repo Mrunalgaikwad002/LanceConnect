@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "./dashboard/Sidebar";
 import Overview from "./dashboard/overview/Overview";
-// import BrowseGigs from "./dashboard/BrowseGigs";
+import BrowseGigs from "./dashboard/browseGigs";
 // import MyOrders from "./dashboard/MyOrders";
 // import Messages from "./dashboard/Messages";
 // import Reviews from "./dashboard/Reviews";
@@ -15,8 +15,8 @@ const ClientDashboard = () => {
     switch (section) {
       case "overview":
         return <Overview />;
-    //   case "browsegigs":
-    //     return <BrowseGigs />;
+      case "browsegigs":
+        return <BrowseGigs />;
     //   case "myorders":
     //     return <MyOrders />;
     //   case "messages":
