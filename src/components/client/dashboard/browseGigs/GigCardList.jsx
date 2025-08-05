@@ -21,12 +21,11 @@ const GigCardList = ({ filteredGigs }) => {
 
   const handleProceedToPayment = async (gig, totalAmount) => {
     try {
-      // Check if user is authenticated
-      const token = localStorage.getItem('token');
       const user = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
       
-      if (!token || !user) {
-        alert('Please log in to make a purchase');
+      if (!user || !token) {
+        alert('Please log in to make a purchase.');
         return;
       }
       
@@ -34,13 +33,13 @@ const GigCardList = ({ filteredGigs }) => {
       console.log('Token available:', !!token);
       
       // Create checkout session
-      const { url } = await createCheckoutSession(gig, totalAmount);
+      const { sessionUrl } = await createCheckoutSession(gig, totalAmount);
       
       // Close summary modal
       setShowSummaryModal(false);
       
       // Redirect to Stripe checkout
-      redirectToCheckout(url);
+      redirectToCheckout(sessionUrl);
     } catch (error) {
       console.error('Payment error:', error);
       alert('Payment failed. Please try again.');
