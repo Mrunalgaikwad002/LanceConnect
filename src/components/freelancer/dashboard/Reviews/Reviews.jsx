@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaSearch, FaStar, FaFilter, FaSort, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaSearch, FaFilter, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import ReviewSummary from "./ReviewSummary";
 import ReviewFilters from "./ReviewFilters";
 import ReviewList from "./ReviewList";
@@ -7,12 +7,10 @@ import ReviewAnalytics from "./ReviewAnalytics";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
-  const [filteredReviews, setFilteredReviews] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     rating: "all",
-    gig: "all",
-    dateSort: "recent"
+    sortBy: "newest",
+    searchTerm: ""
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
@@ -208,11 +206,11 @@ const Reviews = () => {
     let filtered = [...mockReviews];
 
     // Search filter
-    if (searchQuery.trim()) {
+    if (filters.searchTerm.trim()) {
       filtered = filtered.filter(review =>
-        review.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        review.gigTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        review.reviewText.toLowerCase().includes(searchQuery.toLowerCase())
+        review.clientName.toLowerCase().includes(filters.searchTerm.toLowerCase()) ||
+        review.gigTitle.toLowerCase().includes(filters.searchTerm.toLowerCase()) ||
+        review.reviewText.toLowerCase().includes(filters.searchTerm.toLowerCase())
       );
     }
 
@@ -221,21 +219,20 @@ const Reviews = () => {
       filtered = filtered.filter(review => review.rating === parseInt(filters.rating));
     }
 
-    // Gig filter
-    if (filters.gig !== "all") {
-      filtered = filtered.filter(review => review.gigTitle === filters.gig);
-    }
-
-    // Date sort
+    // Sort by date
     filtered.sort((a, b) => {
       const dateA = new Date(a.datePosted);
       const dateB = new Date(b.datePosted);
-      return filters.dateSort === "recent" ? dateB - dateA : dateA - dateB;
+      if (filters.sortBy === "newest") {
+        return dateB - dateA; // Newest first
+      } else {
+        return dateA - dateB; // Oldest first
+      }
     });
 
     setReviews(filtered);
     setCurrentPage(1);
-  }, [searchQuery, filters, mockReviews]);
+  }, [filters, mockReviews]);
 
   // Pagination
   const indexOfLastReview = currentPage * reviewsPerPage;
@@ -270,8 +267,8 @@ const Reviews = () => {
             <input
               type="text"
               placeholder="Search reviews..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={filters.searchTerm}
+              onChange={(e) => setFilters(prev => ({ ...prev, searchTerm: e.target.value }))}
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm w-64"
             />
           </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCamera, FaSave, FaUser, FaBriefcase, FaGraduationCap, FaTag, FaGlobe, FaStar } from "react-icons/fa";
+import { FaCamera, FaSave, FaUser, FaGraduationCap, FaTag, FaStar } from "react-icons/fa";
 
 const ProfileSettings = () => {
   const [profileData, setProfileData] = useState({

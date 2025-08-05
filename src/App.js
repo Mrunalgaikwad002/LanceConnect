@@ -15,18 +15,36 @@ const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user");
   
   if (!token || !user) {
+    console.log('No token or user found, redirecting to login');
     return <Navigate to="/login" replace />;
   }
   
   // Parse user data to check role
-  const userData = JSON.parse(user);
+  let userData;
+  try {
+    userData = JSON.parse(user);
+  } catch (error) {
+    console.error('Error parsing user data:', error);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    return <Navigate to="/login" replace />;
+  }
+  
+  console.log('ProtectedRoute - User data:', userData);
+  console.log('ProtectedRoute - Current path:', window.location.pathname);
+  console.log('ProtectedRoute - User role:', userData.role);
+  console.log('ProtectedRoute - Role type:', typeof userData.role);
+  console.log('ProtectedRoute - Role comparison (client):', userData.role === "client");
+  console.log('ProtectedRoute - Role comparison (freelancer):', userData.role === "freelancer");
   
   // Check if user is trying to access the correct dashboard
   const currentPath = window.location.pathname;
   if (currentPath.includes("/client/dashboard") && userData.role !== "client") {
+    console.log('Redirecting client to freelancer dashboard because role is:', userData.role);
     return <Navigate to="/freelancer/dashboard" replace />;
   }
   if (currentPath.includes("/freelancer/dashboard") && userData.role !== "freelancer") {
+    console.log('Redirecting freelancer to client dashboard because role is:', userData.role);
     return <Navigate to="/client/dashboard" replace />;
   }
   

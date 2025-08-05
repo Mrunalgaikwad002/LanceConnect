@@ -1,5 +1,5 @@
 import React from "react";
-import { FaStar, FaTimes, FaClock, FaCheck, FaUser, FaHeart } from "react-icons/fa";
+import { FaTimes, FaStar, FaClock, FaCheck,  FaHeart } from "react-icons/fa";
 
 const GigDetailsModal = ({ gig, isOpen, onClose, onPurchase }) => {
   if (!isOpen || !gig) return null;

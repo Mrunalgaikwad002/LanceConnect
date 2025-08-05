@@ -32,7 +32,7 @@ const Payments = () => {
     }
   ]);
 
-  const [paymentHistory, setPaymentHistory] = useState([
+  const [paymentHistory] = useState([
     {
       id: "pay_1",
       orderId: "ORD123456",

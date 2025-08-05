@@ -1,5 +1,5 @@
 import React from "react";
-import { FaStar, FaUser, FaCalendar, FaReply, FaThumbsUp, FaPaperclip, FaTimes, FaCheck } from "react-icons/fa";
+import { FaStar, FaCalendar, FaReply, FaThumbsUp, FaPaperclip, FaTimes, FaCheck } from "react-icons/fa";
 
 const ReviewCard = ({ 
   review, 

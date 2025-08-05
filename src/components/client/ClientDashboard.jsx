@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Sidebar from "./dashboard/Sidebar";
 import Overview from "./dashboard/overview/Overview";
 import BrowseGigs from "./dashboard/browseGigs";
@@ -9,7 +10,16 @@ import Payments from "./dashboard/payments";
 import Settings from "./dashboard/settings";
 
 const ClientDashboard = () => {
+  const [searchParams] = useSearchParams();
   const [section, setSection] = useState("overview");
+
+  // Handle URL parameters for section navigation
+  useEffect(() => {
+    const sectionParam = searchParams.get('section');
+    if (sectionParam) {
+      setSection(sectionParam);
+    }
+  }, [searchParams]);
 
   const renderSection = () => {
     switch (section) {

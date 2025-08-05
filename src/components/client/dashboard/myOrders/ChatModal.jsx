@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaTimes, FaPaperPlane, FaUser } from "react-icons/fa";
+import { FaTimes, FaPaperPlane } from "react-icons/fa";
 
 const ChatModal = ({ order, isOpen, onClose }) => {
   const [messages, setMessages] = useState([]);

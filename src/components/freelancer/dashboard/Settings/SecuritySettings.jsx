@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaShieldAlt, FaMobile, FaDesktop, FaMapMarkerAlt, FaClock, FaSignOutAlt } from "react-icons/fa";
+import { FaShieldAlt, FaDesktop, FaMapMarkerAlt, FaClock, FaSignOutAlt } from "react-icons/fa";
 
 const SecuritySettings = () => {
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTimes, FaClock, FaCheck, FaUser, FaStar } from "react-icons/fa";
+import { FaTimes, FaClock, FaCheck, FaStar } from "react-icons/fa";
 
 const GigSummaryModal = ({ gig, isOpen, onClose, onProceedToPayment }) => {
   if (!isOpen || !gig) return null;

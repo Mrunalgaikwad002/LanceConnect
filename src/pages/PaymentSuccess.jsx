@@ -6,12 +6,28 @@ const PaymentSuccess = () => {
   const navigate = useNavigate();
 
   const handleGoToOrders = () => {
-    navigate('/client/dashboard?section=myorders');
+    // Check user role and redirect accordingly
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user.role === 'client') {
+      navigate('/client/dashboard?section=myorders');
+    } else {
+      navigate('/freelancer/dashboard?section=orders');
+    }
   };
 
   const handleGoHome = () => {
-    navigate('/client/dashboard');
+    // Check user role and redirect accordingly
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user.role === 'client') {
+      navigate('/client/dashboard');
+    } else {
+      navigate('/freelancer/dashboard');
+    }
   };
+
+  // Get user role for display
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const isClient = user.role === 'client';
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -67,7 +83,7 @@ const PaymentSuccess = () => {
               </div>
               <div className="flex items-center">
                 <FaCheckCircle className="h-5 w-5 text-blue-600 mr-3" />
-                <span className="text-blue-800">You can track your order in "My Orders"</span>
+                <span className="text-blue-800">You can track your order in "{isClient ? 'My Orders' : 'Orders'}"</span>
               </div>
             </div>
           </div>
@@ -78,7 +94,7 @@ const PaymentSuccess = () => {
               onClick={handleGoToOrders}
               className="flex-1 py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Go to My Orders
+              Go to {isClient ? 'My Orders' : 'Orders'}
             </button>
             <button
               onClick={handleGoHome}

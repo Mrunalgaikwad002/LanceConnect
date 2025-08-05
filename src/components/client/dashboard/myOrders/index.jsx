@@ -102,15 +102,14 @@ const MyOrders = () => {
   const filteredOrders = useMemo(() => {
     return allOrders.filter(order => {
       const matchesSearch = searchTerm === "" || 
-        order.gigTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.freelancer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.id.toLowerCase().includes(searchTerm.toLowerCase());
+        order.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.freelancer.name.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesStatus = selectedStatus === "all" || order.status === selectedStatus;
       
       return matchesSearch && matchesStatus;
     });
-  }, [searchTerm, selectedStatus]);
+  }, [searchTerm, selectedStatus, allOrders]);
 
   const handleSearch = (term) => {
     setSearchTerm(term);

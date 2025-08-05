@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaBell, FaToggleOn, FaToggleOff } from "react-icons/fa";
+import { FaToggleOn, FaToggleOff } from "react-icons/fa";
 
 const NotificationSettings = () => {
   const [notifications, setNotifications] = useState({

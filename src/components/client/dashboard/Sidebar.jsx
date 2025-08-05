@@ -5,7 +5,7 @@ const menu = [
   { key: "browsegigs", label: "Browse Gigs" },
   { key: "myorders", label: "My Orders" },
   { key: "messages", label: "Messages" },
-  { key: "reviews", label: "Reviews" },
+ 
   { key: "payments", label: "Payments" },
   { key: "settings", label: "Settings" },
   { key: "logout", label: "Logout" },

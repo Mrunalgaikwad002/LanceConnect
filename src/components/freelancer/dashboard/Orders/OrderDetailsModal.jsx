@@ -65,11 +65,18 @@ const OrderDetailsModal = ({ order, open, onClose, onStatusChange }) => {
     setSelectedFiles(prev => [...prev, ...newFiles]);
   };
 
-  const handleFileUpload = (e) => {
-    const files = e.target.files;
-    if (files) {
-      handleFileSelect(files);
-    }
+  const handleFileUpload = (fileType) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = fileType === 'image' ? 'image/*' : '.pdf,.doc,.docx';
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        // Handle file upload logic here
+        console.log('File uploaded:', file.name);
+      }
+    };
+    input.click();
   };
 
   const removeFile = (index) => {
@@ -115,10 +122,10 @@ const OrderDetailsModal = ({ order, open, onClose, onStatusChange }) => {
 
   const handleDeliver = async () => {
     if (selectedFiles.length === 0) {
-      setUploadError("Please select at least one file to upload");
+      setUploadError("Please select at least one file to deliver");
       return;
     }
-    
+
     setIsSubmitting(true);
     setUploadProgress(0);
     setUploadError("");
@@ -126,21 +133,22 @@ const OrderDetailsModal = ({ order, open, onClose, onStatusChange }) => {
     try {
       // Simulate file upload progress for each file
       const totalFiles = selectedFiles.length;
-      let completedFiles = 0;
       
       for (let i = 0; i < selectedFiles.length; i++) {
-        // Simulate individual file upload
-        const fileProgress = setInterval(() => {
-          setUploadProgress(prev => {
-            const newProgress = prev + (90 / totalFiles);
-            if (newProgress >= (completedFiles + 1) * (90 / totalFiles)) {
-              clearInterval(fileProgress);
-              completedFiles++;
-              return (completedFiles / totalFiles) * 90;
-            }
-            return newProgress;
-          });
-        }, 200);
+        // Simulate individual file upload with proper closure
+        await new Promise((resolve) => {
+          const interval = setInterval(() => {
+            setUploadProgress(prev => {
+              const newProgress = prev + (90 / totalFiles);
+              if (newProgress >= (i + 1) * (90 / totalFiles)) {
+                clearInterval(interval);
+                resolve();
+                return newProgress;
+              }
+              return newProgress;
+            });
+          }, 200);
+        });
 
         // Simulate API call for each file
         await new Promise(resolve => setTimeout(resolve, 1000));

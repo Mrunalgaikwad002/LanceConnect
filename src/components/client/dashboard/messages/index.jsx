@@ -128,14 +128,11 @@ const Messages = () => {
     return allConversations.filter(conversation => {
       const matchesSearch = searchTerm === "" || 
         conversation.freelancer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        conversation.gig.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        conversation.lastMessage.text.toLowerCase().includes(searchTerm.toLowerCase());
+        conversation.lastMessage.toLowerCase().includes(searchTerm.toLowerCase());
       
-      const matchesStatus = selectedStatus === "all" || conversation.status === selectedStatus;
-      
-      return matchesSearch && matchesStatus;
+      return matchesSearch;
     });
-  }, [searchTerm, selectedStatus]);
+  }, [searchTerm, allConversations]);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
