@@ -5,8 +5,8 @@ import BrowseGigs from "./dashboard/browseGigs";
 import MyOrders from "./dashboard/myOrders";
 import Messages from "./dashboard/messages";
 // import Reviews from "./dashboard/Reviews";
-// import Payments from "./dashboard/Payments";
-// import Settings from "./dashboard/Settings";
+import Payments from "./dashboard/payments";
+import Settings from "./dashboard/settings";
 
 const ClientDashboard = () => {
   const [section, setSection] = useState("overview");
@@ -23,10 +23,10 @@ const ClientDashboard = () => {
         return <Messages />;
     //   case "reviews":
     //     return <Reviews />;
-    //   case "payments":
-    //     return <Payments />;
-    //   case "settings":
-    //     return <Settings />;
+      case "payments":
+        return <Payments />;
+      case "settings":
+        return <Settings />;
       default:
         return <Overview />;
     }

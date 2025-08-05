@@ -5,6 +5,7 @@ import OrderDetailsModal from "./OrderDetailsModal";
 import ChatModal from "./ChatModal";
 import CancelOrderModal from "./CancelOrderModal";
 import SuccessModal from "./SuccessModal";
+import DeliverablesModal from "./DeliverablesModal";
 
 const MyOrders = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +15,7 @@ const MyOrders = () => {
   const [showChatModal, setShowChatModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showDeliverablesModal, setShowDeliverablesModal] = useState(false);
   const [cancelledOrderId, setCancelledOrderId] = useState("");
 
   // Mock data - replace with API call
@@ -49,19 +51,35 @@ const MyOrders = () => {
       canMarkComplete: false
     },
     {
-      id: "ORD123458",
-      gigTitle: "Content Writing Services",
-      freelancer: {
-        name: "Mike Writer",
-        avatar: "MW",
-        rating: 4.7
-      },
-      status: "completed",
-      amount: 800,
-      orderDate: "2024-01-05",
-      deliveryDate: "2024-01-07",
-      canCancel: false,
-      canMarkComplete: false
+             id: "ORD123458",
+       gigTitle: "Content Writing Services",
+       freelancer: {
+         name: "Mike Writer",
+         avatar: "MW",
+         rating: 4.7
+       },
+       status: "completed",
+       amount: 800,
+       orderDate: "2024-01-05",
+       deliveryDate: "2024-01-07",
+       canCancel: false,
+       canMarkComplete: false,
+       isRated: false,
+       deliverables: [
+         {
+           name: "content_article.pdf",
+           type: "application/pdf",
+           size: 245760,
+           url: "#"
+         },
+         {
+           name: "research_notes.docx",
+           type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+           size: 51200,
+           url: "#"
+         }
+       ],
+       deliveryMessage: "Hi! I've completed your content writing project. The article is well-researched and optimized for SEO. I've also included my research notes for your reference. Please let me know if you need any revisions!"
     },
     {
       id: "ORD123459",
@@ -147,6 +165,37 @@ const MyOrders = () => {
     setShowSuccessModal(true);
   };
 
+  const handleViewDeliverables = (orderId) => {
+    const order = allOrders.find(o => o.id === orderId);
+    setSelectedOrder(order);
+    setShowDeliverablesModal(true);
+  };
+
+  const handleRateFreelancer = (orderId, reviewData) => {
+    console.log("Rating freelancer for order:", orderId, reviewData);
+    
+    // Update the order with rating and review
+    setAllOrders(prevOrders => {
+      return prevOrders.map(order => {
+        if (order.id === orderId) {
+          return {
+            ...order,
+            isRated: true,
+            review: {
+              rating: reviewData.rating,
+              comment: reviewData.review
+            }
+          };
+        }
+        return order;
+      });
+    });
+    
+    // Close the deliverables modal after rating
+    setShowDeliverablesModal(false);
+    setSelectedOrder(null);
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -161,13 +210,14 @@ const MyOrders = () => {
         onStatusFilter={handleStatusFilter}
       />
       
-      <OrderList 
-        orders={filteredOrders}
-        onViewOrder={handleViewOrder}
-        onChatWithFreelancer={handleChatWithFreelancer}
-        onMarkAsCompleted={handleMarkAsCompleted}
-        onCancelOrder={handleCancelOrder}
-      />
+             <OrderList 
+         orders={filteredOrders}
+         onViewOrder={handleViewOrder}
+         onChatWithFreelancer={handleChatWithFreelancer}
+         onMarkAsCompleted={handleMarkAsCompleted}
+         onCancelOrder={handleCancelOrder}
+         onViewDeliverables={handleViewDeliverables}
+       />
 
       {/* Order Details Modal */}
       {showDetailsModal && selectedOrder && (
@@ -206,17 +256,30 @@ const MyOrders = () => {
         />
       )}
 
-      {/* Success Modal */}
-      {showSuccessModal && (
-        <SuccessModal
-          isOpen={showSuccessModal}
-          onClose={() => {
-            setShowSuccessModal(false);
-            setCancelledOrderId("");
-          }}
-          orderId={cancelledOrderId}
-        />
-      )}
+             {/* Success Modal */}
+       {showSuccessModal && (
+         <SuccessModal
+           isOpen={showSuccessModal}
+           onClose={() => {
+             setShowSuccessModal(false);
+             setCancelledOrderId("");
+           }}
+           orderId={cancelledOrderId}
+         />
+       )}
+
+       {/* Deliverables Modal */}
+       {showDeliverablesModal && selectedOrder && (
+         <DeliverablesModal
+           order={selectedOrder}
+           isOpen={showDeliverablesModal}
+           onClose={() => {
+             setShowDeliverablesModal(false);
+             setSelectedOrder(null);
+           }}
+           onRateFreelancer={handleRateFreelancer}
+         />
+       )}
     </div>
   );
 };

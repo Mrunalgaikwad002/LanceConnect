@@ -1,12 +1,13 @@
 import React from "react";
-import { FaEye, FaComments, FaCheck, FaTimes, FaStar } from "react-icons/fa";
+import { FaEye, FaComments, FaCheck, FaTimes, FaStar, FaDownload } from "react-icons/fa";
 
 const OrderList = ({ 
   orders, 
   onViewOrder, 
   onChatWithFreelancer, 
   onMarkAsCompleted, 
-  onCancelOrder 
+  onCancelOrder,
+  onViewDeliverables
 }) => {
   const getStatusBadge = (status) => {
     const statusConfig = {
@@ -117,6 +118,17 @@ const OrderList = ({
                       <FaEye className="h-3 w-3 mr-1" />
                       View
                     </button>
+
+                    {/* View Deliverables Button - Only for completed orders */}
+                    {order.status === "completed" && (
+                      <button
+                        onClick={() => onViewDeliverables(order.id)}
+                        className="inline-flex items-center px-3 py-1.5 border border-green-300 shadow-sm text-xs font-medium rounded text-green-700 bg-green-50 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                      >
+                        <FaDownload className="h-3 w-3 mr-1" />
+                        {order.isRated ? 'View Work' : 'Rate & View'}
+                      </button>
+                    )}
 
                     {/* Chat Button */}
                     <button

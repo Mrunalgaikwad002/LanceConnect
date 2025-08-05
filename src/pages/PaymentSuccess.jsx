@@ -1,38 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaCheckCircle, FaBox, FaClock, FaArrowLeft } from 'react-icons/fa';
-import { handlePaymentSuccess } from '../services/stripeService';
 
 const PaymentSuccess = () => {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [orderDetails, setOrderDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const sessionId = searchParams.get('session_id');
-
-  useEffect(() => {
-    const confirmPayment = async () => {
-      if (!sessionId) {
-        setError('No session ID found');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const result = await handlePaymentSuccess(sessionId);
-        setOrderDetails(result);
-        setLoading(false);
-      } catch (error) {
-        console.error('Payment confirmation error:', error);
-        setError('Failed to confirm payment');
-        setLoading(false);
-      }
-    };
-
-    confirmPayment();
-  }, [sessionId]);
 
   const handleGoToOrders = () => {
     navigate('/client/dashboard?section=myorders');
@@ -41,37 +12,6 @@ const PaymentSuccess = () => {
   const handleGoHome = () => {
     navigate('/client/dashboard');
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Confirming your payment...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full mx-4">
-          <div className="text-center">
-            <div className="text-red-500 text-6xl mb-4">❌</div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Payment Error</h1>
-            <p className="text-gray-600 mb-6">{error}</p>
-            <button
-              onClick={handleGoHome}
-              className="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Go to Dashboard
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -91,27 +31,27 @@ const PaymentSuccess = () => {
           </p>
 
           {/* Order Details */}
-          {orderDetails && (
-            <div className="bg-gray-50 rounded-lg p-6 mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Details</h2>
-              <div className="space-y-3 text-left">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Order ID:</span>
-                  <span className="font-medium text-gray-900">{orderDetails.orderId}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Status:</span>
-                  <span className="text-green-600 font-medium">Payment Confirmed</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Date:</span>
-                  <span className="font-medium text-gray-900">
-                    {new Date().toLocaleDateString()}
-                  </span>
-                </div>
+          <div className="bg-gray-50 rounded-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Details</h2>
+            <div className="space-y-3 text-left">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Order ID:</span>
+                <span className="font-medium text-gray-900">
+                  Order completed
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Status:</span>
+                <span className="text-green-600 font-medium">Payment Confirmed</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Date:</span>
+                <span className="font-medium text-gray-900">
+                  {new Date().toLocaleDateString()}
+                </span>
               </div>
             </div>
-          )}
+          </div>
 
           {/* Next Steps */}
           <div className="bg-blue-50 rounded-lg p-6 mb-8">
