@@ -6,7 +6,7 @@
 
 LanceConnect is a full-stack web application built with React.js that provides a comprehensive platform for freelancers and clients to collaborate on projects. The application features role-based dashboards, secure payment processing, real-time messaging, and a complete project management system.
 
-![Platform Overview](https://github.com/Mrunalgaikwad002/LanceConnect/blob/main/Client%20Dashboard%20.png?raw=true)
+![Platform Overview](https://github.com/Mrunalgaikwad002/LanceConnect/blob/main/Landing.png?raw=true)
 
 ## ✨ Features & Functionality
 
@@ -142,7 +142,7 @@ LanceConnect is a full-stack web application built with React.js that provides a
 - **Payment History** - Complete payment transaction history
 - **Withdrawal Management** - Request and track withdrawals
 - **Payment Methods** - Manage payment and withdrawal methods
-
+![Earnings Graph](https://github.com/Mrunalgaikwad002/LanceConnect/blob/main/Freelancer%20Earnings%20Graph.png?raw=true)
 ![Payment History](https://github.com/Mrunalgaikwad002/LanceConnect/blob/main/Freelancer%20Payment%20History.png?raw=true)
 ![Payment Withdraw](https://github.com/Mrunalgaikwad002/LanceConnect/blob/main/Freelancer%20Payment%20Withdraw.png?raw=true)
 
@@ -173,7 +173,7 @@ LanceConnect is a full-stack web application built with React.js that provides a
 - **RESTful APIs** - Secure API endpoints for all functionality
 - **JWT Authentication** - Token-based authentication system
 - **Stripe Integration** - Secure payment processing
-- **Real-time Features** - WebSocket integration for messaging
+
 
 ## 🚀 Getting Started
 
@@ -198,7 +198,8 @@ LanceConnect is a full-stack web application built with React.js that provides a
 3. **Environment Configuration**
    Create a `.env` file in the frontend directory:
    ```env
-   REACT_APP_API_URL=https://lanceconnect-backend.onrender.com
+   REACT_APP_API_URL=<your_backend_url>
+
    ```
 
 4. **Start development server**
@@ -293,7 +294,8 @@ frontend/
 
 ### **Environment Variables**
 ```env
-REACT_APP_API_URL=https://lanceconnect-backend.onrender.com
+REACT_APP_API_URL=<your_backend_url>
+
 ```
 
 ## 🤝 Contributing
@@ -304,27 +306,12 @@ REACT_APP_API_URL=https://lanceconnect-backend.onrender.com
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🆘 Support
 
 For support and questions:
 - Create an issue in the GitHub repository
-- Contact the development team
 - Check the documentation
 
-## 🎯 Roadmap
-
-### **Upcoming Features**
-- **Video Calls** - Integrated video calling for client-freelancer communication
-- **Time Tracking** - Built-in time tracking for hourly projects
-- **Advanced Analytics** - Detailed performance and earnings analytics
-- **Mobile App** - Native mobile applications for iOS and Android
-- **AI Matching** - AI-powered client-freelancer matching
-- **Escrow System** - Enhanced payment protection and escrow services
-
----
 
 **LanceConnect** - Connecting talent with opportunity! 🚀
